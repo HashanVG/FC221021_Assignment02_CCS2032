@@ -116,3 +116,154 @@ body {
 .hero-text span {
   color: #00f0ff;
 }
+.contact-btn {
+  display: inline-block;
+  margin-top: 20px;
+  background-color: #00f0ff;
+  color: #0d0d0d;
+  border: none;
+  padding: 10px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 0 8px #00f0ff, 0 0 16px #00f0ff;
+  animation: neon-glow 2s infinite;
+  transition: background-color 0.3s ease;
+}
+
+.contact-btn:hover {
+  background-color: #0ff;
+  box-shadow: 0 0 12px #00f0ff, 0 0 24px #00f0ff;
+}
+
+.hero-image {
+  max-width: 420px;
+  margin: 20px 0 20px 20px;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* === Section Base === */
+.section {
+  padding: 80px 60px;
+  background-color: transparent;
+  border-top: 1px solid #333;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #00f0ff;
+}
+
+.section p {
+  font-size: 16px;
+  color: #ccc;
+  max-width: 700px;
+}
+
+/* === Skills === */
+.skills-section {
+  max-width: 700px;
+  margin-top: 40px;
+}
+
+.skill {
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.skill-name {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #e0e0e0;
+}
+
+.progress-bar {
+  background-color: #222;
+  border-radius: 10px;
+  height: 10px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  width: 0%;
+  border-radius: 10px;
+  transition: width 2s ease;
+  background-color: #39ff14;
+}
+
+.progress.green {
+  background-color: #ff4ff9;
+}
+
+.skill::after {
+  content: attr(data-percent);
+  float: right;
+  margin-top: 4px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+/* === Education === */
+.education-section {
+  padding: 60px 20px;
+  background-color: transparent;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #00f0ff;
+}
+
+.edu-card {
+  background-color: #1a1a1a;
+  padding: 20px 25px;
+  border-radius: 20px;
+  border: 2px solid #00f0ff;
+  box-shadow: 0 4px 12px rgba(0, 255, 255, 0.1);
+  margin-bottom: 30px;
+  max-width: 900px;
+  color: #e0e0e0;
+}
+
+.edu-title {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 5px;
+  color: #00f0ff;
+}
+
+.edu-institute {
+  font-style: italic;
+  color: #aaa;
+  margin-bottom: 10px;
+}
+
+.edu-card ul {
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+/* === Scroll Animation === */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

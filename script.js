@@ -67,43 +67,53 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 console.log("Portfolio loaded.");
-// Mobile menu toggle functionality
-const setupMobileMenu = () => {
+// Improved Mobile Navigation
+document.addEventListener("DOMContentLoaded", () => {
+  // Create mobile menu button
   const navbar = document.querySelector('.navbar');
   const navLinks = document.querySelector('.nav-links');
-  const menuToggle = document.createElement('div');
   
-  menuToggle.className = 'mobile-menu-toggle';
-  menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-  navbar.appendChild(menuToggle);
+  const menuBtn = document.createElement('button');
+  menuBtn.className = 'mobile-menu-btn';
+  menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+  navbar.appendChild(menuBtn);
   
-  menuToggle.addEventListener('click', () => {
+  // Toggle mobile menu
+  menuBtn.addEventListener('click', () => {
     navLinks.classList.toggle('active');
-    menuToggle.innerHTML = navLinks.classList.contains('active') 
+    menuBtn.innerHTML = navLinks.classList.contains('active') 
       ? '<i class="fas fa-times"></i>' 
       : '<i class="fas fa-bars"></i>';
   });
   
   // Close menu when clicking a link
-  document.querySelectorAll('.nav-item').forEach(item => {
-    item.addEventListener('click', () => {
-      navLinks.classList.remove('active');
-      menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 992) {
+        navLinks.classList.remove('active');
+        menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      }
     });
   });
-};
-
-// Initialize mobile menu only on small screens
-if (window.innerWidth <= 768) {
-  setupMobileMenu();
-}
-
-// Update on resize
-window.addEventListener('resize', () => {
-  if (window.innerWidth <= 768 && !document.querySelector('.mobile-menu-toggle')) {
-    setupMobileMenu();
-  } else if (window.innerWidth > 768 && document.querySelector('.mobile-menu-toggle')) {
-    document.querySelector('.mobile-menu-toggle').remove();
-    document.querySelector('.nav-links').classList.remove('active');
-  }
+  
+  // Highlight active section
+  const sections = document.querySelectorAll('section');
+  const navItems = document.querySelectorAll('.nav-links a');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navItems.forEach(item => {
+          item.classList.remove('active');
+          if (item.getAttribute('href') === `#${id}`) {
+            item.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  sections.forEach(section => observer.observe(section));
 });
+

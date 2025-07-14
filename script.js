@@ -67,4 +67,43 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 console.log("Portfolio loaded.");
+// Mobile menu toggle functionality
+const setupMobileMenu = () => {
+  const navbar = document.querySelector('.navbar');
+  const navLinks = document.querySelector('.nav-links');
+  const menuToggle = document.createElement('div');
+  
+  menuToggle.className = 'mobile-menu-toggle';
+  menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+  navbar.appendChild(menuToggle);
+  
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    menuToggle.innerHTML = navLinks.classList.contains('active') 
+      ? '<i class="fas fa-times"></i>' 
+      : '<i class="fas fa-bars"></i>';
+  });
+  
+  // Close menu when clicking a link
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+    });
+  });
+};
 
+// Initialize mobile menu only on small screens
+if (window.innerWidth <= 768) {
+  setupMobileMenu();
+}
+
+// Update on resize
+window.addEventListener('resize', () => {
+  if (window.innerWidth <= 768 && !document.querySelector('.mobile-menu-toggle')) {
+    setupMobileMenu();
+  } else if (window.innerWidth > 768 && document.querySelector('.mobile-menu-toggle')) {
+    document.querySelector('.mobile-menu-toggle').remove();
+    document.querySelector('.nav-links').classList.remove('active');
+  }
+});
